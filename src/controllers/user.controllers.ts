@@ -7,12 +7,12 @@ const users = [
 ];
 
 // FETCH ALL USERS
-export const getUsers = (req: Request, res: Response) => {
+export const getUsers = async (req: Request, res: Response) => {
     res.status(200).json({ success: true, data: users });
 }
 
 // FETCH USER BY ID
-export const getUserById = (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response) => {
     const id = req.params.id;
     if (isNaN(Number(id))) {
         return res.status(400).json({ success: false, message: "Invalid user ID" });
@@ -26,7 +26,7 @@ export const getUserById = (req: Request, res: Response) => {
 }
 
 // CREATE NEW USER
-export const createUser = (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
     const { name } = req.body;
     if (typeof name !== "string" || name.trim() === "") {
         return res.status(400).json({
@@ -48,7 +48,7 @@ export const createUser = (req: Request, res: Response) => {
 }
 
 // DELETE USER BY ID
-export const deleteUserById = (req: Request, res: Response) => {
+export const deleteUserById = async (req: Request, res: Response) => {
     const id = req.params.id;
     const index = users.findIndex(user => user.id === Number(id));
     if (isNaN(Number(id))) {
